@@ -36,7 +36,7 @@ local chisel_sessions_mappings = function(prompt_bufnr, map)
 end
 
 local chisel_sessions_previewer = previewers.new_termopen_previewer({
-    get_command = function(entry,status)
+    get_command = function(entry, status)
         return { "chisel" , "view" , entry.value.id }
     end,
 })
