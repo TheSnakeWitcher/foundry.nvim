@@ -8,13 +8,13 @@ M.check_executable = function(executable)
     end
 end
 
-local function insert_with_key(key,value,tbl)
+local function insert_with_key(key, value, tbl)
     if not value then return tbl end
-    table.insert(tbl,key)
-    table.insert(tbl,value)
+    table.insert(tbl, key)
+    table.insert(tbl, value)
 end
 
-M.insert_not_nil_opts = function(opts,tbl)
+M.insert_not_nil_opts = function(opts, tbl)
     tbl = insert_with_key(
         "--fork-url",
         opts.fork_url,
