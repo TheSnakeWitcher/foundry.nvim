@@ -20,19 +20,20 @@ local defaults = {
     }
 
 }
-M.values = {}
-
-
+M.options = {}
 
 setmetatable(M,{
     __index = function(tbl, k)
-        return M.values[k]
+        if M.options[k] then
+            return M.options
+        else
+            return defaults
+        end
     end
 })
 
 M.setup = function(opts)
-    M.values = vim.tbl_deep_extend("force",defaults,opts)
-    -- M = vim.tbl_deep_extend("force",defaults,opts)
+    M.options = vim.tbl_deep_extend("force", defaults, opts)
 end
 
 
