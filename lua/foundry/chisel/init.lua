@@ -6,7 +6,7 @@ local config = require("foundry.config").chisel
 local M = {}
 
 
--- launch chisel REPL
+--- Launch chisel REPL
 function M.open()
     Terminal:new({
         cmd = "chisel" ,
@@ -15,7 +15,8 @@ function M.open()
     }):toggle()
 end
 
--- launches the REPL and loads the cached session with {id} in case it exists
+--- Launches the REPL and loads the cached session with {id} in case it exists
+--- @param id string
 function M.load(id)
     Terminal:new({
         cmd = "chisel load " .. id ,
@@ -24,13 +25,14 @@ function M.load(id)
     }):toggle()
 end
 
--- list cached sessions stored in ~/.foundry/cache/chisel
+--- List cached sessions stored in ~/.foundry/cache/chisel
+--- @return string[] sessions
 function M.list()
     local results = {}
 
     Job:new({
         command = "chisel" ,
-        args = {"list"},
+        args = { "list" },
         on_exit = function(job,_)
             local sessions = {}
             local dates = {}
@@ -62,7 +64,8 @@ function M.list()
     return results
 end
 
--- displays the source code of the sessions's REPL contract with {id} in case it exists
+--- Displays the source code of the sessions's REPL contract with {id} in case it exists
+--- @param id string
 function M.view(id)
     Terminal:new({
         cmd = "chisel view " .. id ,
@@ -71,12 +74,11 @@ function M.view(id)
     }):toggle()
 end
 
--- deletes all cache sessions within ~/.foundry/cache/chisel directory.
--- NOTE: These sessions are unrecoverable, so use this function with care.
+--- Deletes all cache sessions within ~/.foundry/cache/chisel directory.
 function M.clear_cache()
     Job:new({
         command = "chisel" ,
-        args = {"clear-cache"},
+        args = { "clear-cache" },
         on_exit = vim.notify("chisel cached cleaned")
     }):start()
 end
